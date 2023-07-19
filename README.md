@@ -1,7 +1,6 @@
 - 👋 Hi, I’m @12greeshma
-- 👀 I’m interested to work as web developer by the way learning Data Science concepts
-- 🌱 I’m currently learning backend related programming languages
-- 💞️ I’m looking to collaborate on Projects on AI and DataScience and as web developer
+- 👀 I'm Currently Learning Data Science and intersted to work on Data Science projects 
+- 💞️ I’m looking to collaborate on Projects of AI and DataScience
 - 📫 How to reach me ...
 
 <!---
