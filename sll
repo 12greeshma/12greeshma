@@ -1,0 +1,247 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//
+struct LinkedList
+{
+    int data;
+    struct LinkedList* link;
+};
+int main()
+{
+    char c;
+    struct LinkedList *head = NULL;
+
+    do
+    {
+        int choice;
+        printf("1. creation\n");
+        printf("2. deleting at end \n");
+        printf("3. deletion at beginning\n");
+        printf("4. display\n");
+        printf("5. delete in between\n");
+        printf("6. insert in between\n");
+        printf("7. insert beg\n");
+        printf("8. insert at end");
+        printf("enter your choice\n");
+        scanf("%d",&choice);
+
+        switch(choice)
+        {
+        case 1:
+            if (head == NULL)
+                {
+                    head = (struct LinkedList*)malloc(sizeof(struct LinkedList));
+            create(head);
+            }
+            else
+            {
+                printf("List is already created\n");
+            }
+            break;
+        case 2:
+            if(head !=NULL)
+            {
+                delend(head);
+            }
+            else
+            {
+                printf("Null list");
+            }
+        case 3:
+
+                if (head!=NULL)
+                {
+                    delbeg(&head);
+                }
+                else
+                {
+                    printf("no list\n");
+                }
+               break;
+        case 4:
+            if(head!=NULL)
+            {
+                display(head);
+            }
+            else
+            {
+                printf("No lsit\n");
+            }
+            break;
+         case 5:
+            if(head!=NULL)
+            {
+                delinbet(head);
+            }
+            else
+            {
+                printf("No lsit\n");
+            }
+            break;
+        case 6:
+            if(head!=NULL)
+            {
+                insinbet(head);
+            }
+            else
+            {
+                printf("No lsit\n");
+            }
+            break;
+        case 7:
+            if(head!=NULL)
+            {
+                insbeg(&head);
+            }
+            else
+            {
+                printf("No lsit\n");
+            }
+            break;
+        case 8:
+            if(head!=NULL)
+            {
+                insend(head);
+            }
+            else
+            {
+                printf("No lsit\n");
+            }
+            break;
+
+
+        }
+        printf("do you want to continue\n");
+            scanf(" %c",&c);
+
+    } while(c=='y');
+}
+
+void create(struct LinkedList* ptr)
+{
+    char c;
+    printf("enter the data\n");
+    scanf("%d",&ptr->data);
+    printf("do you want to insert  continue\n");
+    scanf(" %c",&c);
+
+    if (c=='y')
+    {
+
+        create(ptr->link);
+    }
+    else
+    {
+        ptr->link = NULL;
+    }
+
+}
+
+
+void delend(struct LinkedList* ptr)
+{
+    struct LinkedList* t1;
+    struct LinkedList*t2 ;
+
+    t2 = ptr->link;
+    t1 = ptr;
+    while(t2->link!=NULL)
+    {
+        t1 = t1->link;
+        t2 = t2->link;
+    }
+    t1->link = NULL;
+    free(t2);
+    printf("deletion done");
+
+}
+void delbeg(struct LinkedList **head)
+{
+    struct LinkedList *temp = *head;
+
+        *head = (*head)->link;
+        free(temp);
+
+    printf("deletion at beg done\n");
+}
+
+void display(struct LinkedList* ptr)
+{
+    while(ptr!=NULL){
+    printf("%d--> ",ptr->data);
+    ptr = ptr->link;
+    }printf("NULL\n");
+}
+
+void delinbet(struct LinkedList* t1)
+{
+    int pos,count=1;
+    struct LinkedList* t2;
+    t2 = t1->link;
+    printf("enter pos to delete\n");
+    scanf("%d",&pos);
+    while( count <pos)
+    {
+        t2 = t2->link;
+        t1 = t1->link;
+        count++;
+    }
+    t1->link = t2->link;
+    free(t2);
+
+}
+
+void insinbet(struct LinkedList* t1)
+{
+    int pos,count=1;
+    struct LinkedList* t2;
+    t2=t1->link;
+    printf("enter pos to insert\n");
+    scanf("%d",&pos);
+    while(count<pos)
+    {
+        t2 = t2->link;
+        t1 = t1->link;
+        count;
+    }
+    struct LinkedList* newnode = (struct LinkedList*)malloc(sizeof(struct LinkedList));
+    printf("enter a number to insert\n");
+    scanf("%d",&newnode->data);
+    t1->link = newnode;
+    newnode->link = t2;
+    printf("inserted node at %d\n",pos);
+
+}
+
+void insbeg(struct LinkedList** head)
+{
+    struct LinkedList* temp =(struct LinkedList*)malloc(sizeof(struct LinkedList));
+    printf("enter data to insert at beg\n");
+    scanf("%d",&temp->data);
+
+    temp->link = *head;
+    *head  =temp;
+    printf("data inserted at beg\n");
+
+
+}
+
+void insend(struct LinkedList* temp)
+{
+    struct LinkedList* newdata =  (struct LinkedList*)malloc(sizeof(struct LinkedList));
+    printf("enter the data to insert at end\n");
+    scanf("%d",&newdata->data);
+    newdata->link = NULL;
+    while(temp->link != NULL)
+    {
+        temp = temp->link;
+    }
+    temp->link = newdata;
+    printf("inserted data %d at end of list\n",newdata->data);
+}
+
+
+
+
+
